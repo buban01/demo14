@@ -25,7 +25,7 @@ Metadata:
     Properties:
       VersioningConfiguration:
         Status: Enabled
-        Pipeline:
+   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
       ArtifactStore:
