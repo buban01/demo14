@@ -1,38 +1,20 @@
 version: 0.2
-env:
-  secrets-manager:
-    LOGIN: prod/sonar:sonartoken
-    HOST: prod/sonar:HOST
-    Project: prod/sonar:Project
+
 
 phases:
   install:
     runtime-versions:
       java: corretto11
   pre_build:
-    
-      commands:
-      - echo Build started on `date`
-      - wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
-      - tar xzf apache-maven-3.5.4-bin.tar.gz
-      - ln -s apache-maven-3.5.4 maven
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
-      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
-      - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
+    commands:
+      - echo Nothing to do in the pre_build phase...
   build:
     commands:
-       - mvn install     
-       - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project 
-       
+      - echo Build started on `date`
+      - mvn install
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
-    - cd target/
-    - ls
     - target/messageUtil-1.0.jar
-    - index.html
-    - appspec.yml
-    - scripts/install_dependencies
-    - scripts/start_server
